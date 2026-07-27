@@ -11,166 +11,236 @@
 <style>
 
 *{
- box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
- margin:0;
- font-family:"Tahoma",Arial,sans-serif;
- background:#f3f3f3;
- color:#222;
+margin:0;
+font-family:Tahoma,Arial,sans-serif;
+background:#f3f3f3;
+color:#222;
 }
 
 
+/* الرأس */
+
 header{
- background:#111;
- color:white;
- padding:25px;
- text-align:center;
+background:#111;
+color:white;
+padding:20px;
+text-align:center;
+position:relative;
 }
 
 
 .logo-img{
- width:120px;
- height:120px;
- object-fit:cover;
- border-radius:50%;
- margin-bottom:10px;
- border:3px solid white;
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:50%;
+border:3px solid white;
 }
 
 
 .logo{
- font-size:38px;
- font-weight:bold;
+font-size:38px;
+font-weight:bold;
 }
 
 
 .subtitle{
- color:#ddd;
- font-size:18px;
+color:#ddd;
+font-size:18px;
 }
 
 
-nav{
- background:#b40000;
- padding:15px;
- text-align:center;
+/* زر القائمة */
+
+.menu-btn{
+position:absolute;
+right:20px;
+top:25px;
+font-size:32px;
+cursor:pointer;
 }
 
 
-nav a{
- color:white;
- text-decoration:none;
- margin:10px;
- font-size:17px;
+/* القائمة */
+
+.menu{
+display:none;
+position:absolute;
+right:10px;
+top:70px;
+background:white;
+width:200px;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 3px 10px #777;
+z-index:10;
 }
 
+
+.menu a{
+display:block;
+padding:12px;
+color:#222;
+text-decoration:none;
+border-bottom:1px solid #ddd;
+}
+
+
+.menu a:hover{
+background:#eee;
+}
+
+
+/* عاجل */
 
 .breaking{
- background:#e00000;
- color:white;
- margin:20px;
- padding:12px;
- border-radius:8px;
- font-weight:bold;
+background:#d00000;
+color:white;
+margin:20px;
+padding:12px;
+border-radius:8px;
+font-weight:bold;
 }
 
+
+/* المحتوى */
 
 .container{
- padding:20px;
+padding:20px;
 }
 
 
-.main-news{
- background:white;
- border-radius:15px;
- padding:25px;
- box-shadow:0 3px 10px #ccc;
+/* المنشور المميز */
+
+.featured{
+background:white;
+border-radius:15px;
+padding:20px;
+box-shadow:0 3px 10px #ccc;
 }
 
 
-.main-news h1{
- color:#b40000;
+.featured img{
+width:100%;
+height:300px;
+object-fit:cover;
+border-radius:10px;
 }
 
 
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
- gap:20px;
- margin-top:20px;
+.featured h2{
+color:#b40000;
 }
 
 
-.card{
- background:white;
- border-radius:12px;
- padding:20px;
- box-shadow:0 2px 8px #ddd;
+.read{
+display:inline-block;
+background:#111;
+color:white;
+padding:10px 20px;
+border-radius:6px;
+text-decoration:none;
 }
 
 
-.card h3{
- color:#b40000;
+/* المنشورات */
+
+.posts{
+margin-top:30px;
 }
 
 
-.btn{
- display:inline-block;
- background:#111;
- color:white;
- padding:8px 15px;
- border-radius:5px;
- text-decoration:none;
+.post{
+background:white;
+border-radius:12px;
+padding:15px;
+margin-bottom:20px;
+box-shadow:0 2px 8px #ddd;
 }
 
 
-/* رابط فيسبوك */
+.post img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
+
+.post h3{
+color:#b40000;
+}
+
+
+.date{
+color:#777;
+font-size:14px;
+}
+
+
+/* الاشتراك */
+
+.subscribe{
+background:white;
+padding:20px;
+text-align:center;
+border-radius:12px;
+margin-top:20px;
+}
+
+
+.subscribe button{
+background:#b40000;
+color:white;
+border:0;
+padding:12px 20px;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+
+/* فيسبوك */
 
 .social{
- text-align:center;
- margin-top:20px;
- padding:10px;
+text-align:center;
+margin:20px;
 }
 
 
 .social img{
- width:35px;
- height:35px;
- object-fit:contain;
- border-radius:50%;
- transition:0.3s;
+width:35px;
+height:35px;
 }
 
 
-.social img:hover{
- transform:scale(1.2);
-}
-
+/* الفوتر */
 
 footer{
- margin-top:30px;
- background:#111;
- color:white;
- text-align:center;
- padding:20px;
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:30px;
 }
+
 
 
 @media(max-width:600px){
 
 .logo{
- font-size:30px;
+font-size:30px;
 }
 
-nav a{
- display:inline-block;
- margin:5px;
+.featured img{
+height:220px;
 }
 
 }
-
 
 </style>
 
@@ -182,7 +252,13 @@ nav a{
 
 <header>
 
-<img src="./logo.png.PNG" alt="طفس الرسمية" class="logo-img">
+
+<div class="menu-btn" onclick="openMenu()">
+☰
+</div>
+
+
+<img src="logo.png.PNG" class="logo-img">
 
 
 <div class="logo">
@@ -195,21 +271,19 @@ Tafas Official
 </div>
 
 
-</header>
-
-
-
-<nav>
+<div class="menu" id="menu">
 
 <a href="#">الرئيسية</a>
 <a href="#">طفس</a>
 <a href="#">درعا</a>
 <a href="#">سوريا</a>
 <a href="#">فيديو</a>
-<a href="#">صور</a>
 <a href="#">وفيات</a>
 
-</nav>
+</div>
+
+
+</header>
 
 
 
@@ -224,84 +298,144 @@ Tafas Official
 <div class="container">
 
 
-<div class="main-news">
 
-<h1>
-طفس الرسمية
-</h1>
+<!-- المنشور المميز المتحرك -->
+
+<div class="featured">
 
 
-<p>
-صفحة إعلامية مستقلة لا تتبع لأي جهة سياسية أو عسكرية، تهتم بنشر الأخبار المتنوعة والهامة بشكل عام وبمدينة طفس خاصة.
+<img id="featureImg" src="post1.jpg">
+
+
+<h2 id="featureTitle">
+عنوان المنشور الأول
+</h2>
+
+
+<p id="featureText">
+اكتب هنا نص المنشور الأول.
 </p>
 
 
-<a class="btn" href="#">
-اقرأ الأخبار
+<a class="read" href="#">
+قراءة المزيد
 </a>
 
 
 </div>
+<!-- آخر المنشورات -->
+
+<div class="posts">
+
+<h2>آخر المنشورات</h2>
 
 
+<!-- المنشور الأحدث -->
 
-<div class="grid">
+<div class="post">
 
+<img src="post2.jpg">
 
-<div class="card">
+<h3>
+عنوان المنشور الثاني
+</h3>
 
-<h3>أخبار طفس</h3>
+<div class="date">
+27 يوليو 2026
+</div>
 
 <p>
-آخر الأخبار المحلية والأحداث اليومية.
+اكتب هنا نص المنشور الثاني. هذا المنشور يظهر بعد المنشور المميز.
 </p>
+
+<a class="read" href="#">
+قراءة المزيد
+</a>
 
 </div>
 
 
 
-<div class="card">
+<!-- المنشور الثالث -->
 
-<h3>أخبار درعا</h3>
+<div class="post">
+
+<img src="post3.jpg">
+
+<h3>
+عنوان المنشور الثالث
+</h3>
+
+<div class="date">
+26 يوليو 2026
+</div>
 
 <p>
-تغطية أخبار المحافظة والمناطق المحيطة.
+اكتب هنا نص المنشور الثالث.
 </p>
+
+<a class="read" href="#">
+قراءة المزيد
+</a>
 
 </div>
 
 
 
-<div class="card">
 
-<h3>سوريا</h3>
+<!-- المنشور الرابع -->
+
+<div class="post">
+
+<img src="post4.jpg">
+
+<h3>
+عنوان المنشور الرابع
+</h3>
+
+<div class="date">
+25 يوليو 2026
+</div>
 
 <p>
-أهم الأخبار السورية.
+اكتب هنا نص المنشور الرابع.
 </p>
+
+<a class="read" href="#">
+قراءة المزيد
+</a>
+
+</div>
+
 
 </div>
 
 
 
-<div class="card">
+<!-- الاشتراك بالإشعارات -->
 
-<h3>الوفيات</h3>
+<div class="subscribe">
+
+<h2>
+🔔 اشترك بالإشعارات
+</h2>
 
 <p>
-الوفيات والأحداث الهامة.
+ابقَ على اطلاع بآخر أخبار طفس الرسمية
 </p>
 
-</div>
+
+<button onclick="subscribeNotifications()">
+اشترك الآن
+</button>
 
 
 </div>
 
 
-</div>
 
 
-
+<!-- فيسبوك -->
 
 <div class="social">
 
@@ -313,6 +447,9 @@ Tafas Official
 
 </div>
 
+
+
+</div>
 
 
 
@@ -328,6 +465,186 @@ Tafas Official
 
 
 
-</body>
+<script>
 
-</html>
+function openMenu(){
+
+let menu=document.getElementById("menu");
+
+if(menu.style.display==="block"){
+
+menu.style.display="none";
+
+}else{
+
+menu.style.display="block";
+
+}
+
+}
+
+
+
+<!-- آخر المنشورات -->
+
+<div class="posts">
+
+<h2>آخر المنشورات</h2>
+
+
+<!-- المنشور الأحدث -->
+
+<div class="post">
+
+<img src="post2.jpg">
+
+<h3>
+عنوان المنشور الثاني
+</h3>
+
+<div class="date">
+27 يوليو 2026
+</div>
+
+<p>
+اكتب هنا نص المنشور الثاني. هذا المنشور يظهر بعد المنشور المميز.
+</p>
+
+<a class="read" href="#">
+قراءة المزيد
+</a>
+
+</div>
+
+
+
+<!-- المنشور الثالث -->
+
+<div class="post">
+
+<img src="post3.jpg">
+
+<h3>
+عنوان المنشور الثالث
+</h3>
+
+<div class="date">
+26 يوليو 2026
+</div>
+
+<p>
+اكتب هنا نص المنشور الثالث.
+</p>
+
+<a class="read" href="#">
+قراءة المزيد
+</a>
+
+</div>
+
+
+
+
+<!-- المنشور الرابع -->
+
+<div class="post">
+
+<img src="post4.jpg">
+
+<h3>
+عنوان المنشور الرابع
+</h3>
+
+<div class="date">
+25 يوليو 2026
+</div>
+
+<p>
+اكتب هنا نص المنشور الرابع.
+</p>
+
+<a class="read" href="#">
+قراءة المزيد
+</a>
+
+</div>
+
+
+</div>
+
+
+
+<!-- الاشتراك بالإشعارات -->
+
+<div class="subscribe">
+
+<h2>
+🔔 اشترك بالإشعارات
+</h2>
+
+<p>
+ابقَ على اطلاع بآخر أخبار طفس الرسمية
+</p>
+
+
+<button onclick="subscribeNotifications()">
+اشترك الآن
+</button>
+
+
+</div>
+
+
+
+
+<!-- فيسبوك -->
+
+<div class="social">
+
+<a href="https://www.facebook.com/share/199KcC8qgg/?mibextid=wwXIfr" target="_blank">
+
+<img src="facebook.PNG" alt="فيسبوك طفس الرسمية">
+
+</a>
+
+</div>
+
+
+
+</div>
+
+
+
+<footer>
+
+© 2026 Tafas alrasmia
+
+<br>
+
+طفس الرسمية
+
+</footer>
+
+
+
+<script>
+
+function openMenu(){
+
+let menu=document.getElementById("menu");
+
+if(menu.style.display==="block"){
+
+menu.style.display="none";
+
+}else{
+
+menu.style.display="block";
+
+}
+
+}
+
+
+
+</script>
