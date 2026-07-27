@@ -647,4 +647,100 @@ menu.style.display="block";
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
+const supabaseUrl =
+"https://bcrrogdjklozokgdvgea.supabase.co";
+
+const supabaseKey =
+"sb_publishable_ChYRSvUvuEoTccNA6jDEVw_ipjty2kB";
+
+
+const supabase =
+window.supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+
+
+async function loadPosts(){
+
+
+let {data,error}=await supabase
+.from("posts")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+
+if(error){
+
+console.log(error);
+return;
+
+}
+
+
+
+let postsDiv=document.querySelector(".posts");
+
+
+postsDiv.innerHTML="<h2>آخر المنشورات</h2>";
+
+
+
+data.forEach(post=>{
+
+
+postsDiv.innerHTML += `
+
+<div class="post">
+
+
+${post.image ? 
+`<img src="${post.image}">`
+:
+""}
+
+
+<h3>
+${post.title || ""}
+</h3>
+
+
+<div class="date">
+${new Date(post.created_at).toLocaleDateString("ar")}
+</div>
+
+
+<p>
+${post.content || ""}
+</p>
+
+
+${post.video ?
+`<video controls width="100%">
+<source src="${post.video}">
+</video>`
+:
+""}
+
+
+</div>
+
+`;
+
+
+});
+
+
+}
+
+
+
+loadPosts();
+
+
 </script>
