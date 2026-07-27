@@ -7,16 +7,20 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>
 لوحة تحكم طفس الرسمية
 </title>
 
 
+
 <style>
+
 
 *{
 box-sizing:border-box;
 }
+
 
 
 body{
@@ -27,7 +31,11 @@ font-family:Tahoma,Arial,sans-serif;
 
 background:#f2f2f2;
 
+color:#222;
+
 }
+
+
 
 
 
@@ -61,19 +69,34 @@ border:3px solid white;
 
 
 
-h1{
 
-color:white;
+header h1{
+
+margin:10px 0;
+
+font-size:30px;
 
 }
 
 
 
+
+
 .container{
 
-max-width:700px;
+max-width:800px;
 
 margin:30px auto;
+
+padding:20px;
+
+}
+
+
+
+
+
+.box{
 
 background:white;
 
@@ -83,7 +106,11 @@ border-radius:15px;
 
 box-shadow:0 3px 10px #ccc;
 
+margin-bottom:25px;
+
 }
+
+
 
 
 
@@ -96,6 +123,8 @@ border-right:5px solid #b40000;
 padding-right:10px;
 
 }
+
+
 
 
 
@@ -116,47 +145,48 @@ border-radius:8px;
 
 font-size:16px;
 
+
 }
+
+
 
 
 
 textarea{
 
-height:150px;
+height:140px;
+
+resize:none;
 
 }
 
 
-
-label{
-
-font-weight:bold;
-
-}
 
 
 
 button{
 
-width:100%;
 
-padding:14px;
-
-background:#b40000;
-
-color:white;
+padding:12px;
 
 border:0;
 
 border-radius:8px;
 
-font-size:17px;
+font-size:16px;
 
 cursor:pointer;
 
-margin-top:10px;
+color:white;
+
+background:#b40000;
+
+width:100%;
+
 
 }
+
+
 
 
 
@@ -168,7 +198,8 @@ background:#900000;
 
 
 
-.logout{
+
+.delete{
 
 background:#222;
 
@@ -176,20 +207,93 @@ background:#222;
 
 
 
-.preview img,
-.preview video{
 
-width:100%;
 
-margin-top:15px;
+.edit{
 
-border-radius:10px;
+background:#0066aa;
 
 }
 
 
 
+
+.post{
+
+
+background:#fff;
+
+border-radius:12px;
+
+padding:15px;
+
+margin-top:15px;
+
+box-shadow:0 2px 8px #ddd;
+
+
+}
+
+
+
+
+.post img,
+.post video{
+
+
+width:100%;
+
+border-radius:10px;
+
+margin-top:10px;
+
+
+}
+
+
+
+
+
+.post h3{
+
+color:#b40000;
+
+}
+
+
+
+
+
+.actions{
+
+
+display:flex;
+
+gap:10px;
+
+margin-top:10px;
+
+
+}
+
+
+
+
+
+.actions button{
+
+
+width:50%;
+
+
+}
+
+
+
+
+
 footer{
+
 
 text-align:center;
 
@@ -197,15 +301,19 @@ padding:20px;
 
 color:#777;
 
+
 }
 
 
+
 </style>
+
 
 </head>
 
 
 <body>
+
 
 
 <header>
@@ -220,27 +328,28 @@ color:#777;
 
 
 </header>
-<div class="container">
 
+
+
+
+
+<div class="container">
+  <div class="box">
 
 <h2>
-إضافة خبر جديد
+إضافة منشور جديد
 </h2>
-
 
 
 <input 
 id="title"
-type="text"
 placeholder="عنوان الخبر">
-
 
 
 <textarea 
 id="content"
 placeholder="نص الخبر">
 </textarea>
-
 
 
 
@@ -251,26 +360,21 @@ placeholder="نص الخبر">
 
 <select id="category">
 
-
 <option value="طفس">
 طفس
 </option>
-
 
 <option value="درعا">
 درعا
 </option>
 
-
 <option value="سوريا">
 سوريا
 </option>
 
-
 <option value="وفيات">
 وفيات
 </option>
-
 
 </select>
 
@@ -305,23 +409,29 @@ accept="video/*">
 
 
 
-<div class="preview">
-
-
 <img 
 id="imagePreview"
-style="display:none;">
+style="
+display:none;
+width:100%;
+border-radius:10px;
+margin-top:10px;
+">
+
+
 
 
 
 <video 
 id="videoPreview"
 controls
-style="display:none;">
+style="
+display:none;
+width:100%;
+border-radius:10px;
+margin-top:10px;
+">
 </video>
-
-
-</div>
 
 
 
@@ -334,18 +444,45 @@ style="display:none;">
 </button>
 
 
+</div>
 
 
 
-<button class="logout" onclick="logout()">
+
+
+
+
+
+<div class="box">
+
+
+<h2>
+إدارة المنشورات
+</h2>
+
+
+
+<div id="posts">
+
+جاري تحميل المنشورات...
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<button onclick="logout()" style="background:#333">
 
 تسجيل الخروج
 
 </button>
 
 
-
-</div>
 
 
 
@@ -359,21 +496,13 @@ style="display:none;">
 تصميم وتطوير: فارس الرفاعي
 
 </footer>
-
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
 
 
 <script>
 
 
-// حماية الصفحة
-
+// حماية لوحة التحكم
 
 if(localStorage.getItem("tafasLogin") !== "true"){
 
@@ -385,7 +514,8 @@ window.location.href="admin.html";
 
 
 
-// Supabase
+
+// إعداد Supabase
 
 
 const supabaseUrl =
@@ -403,6 +533,12 @@ supabaseUrl,
 supabaseKey
 );
 
+
+
+
+
+
+let editId = null;
 
 
 
@@ -455,7 +591,8 @@ video.style.display="block";
 
 
 
-// نشر الخبر
+
+// نشر أو تعديل
 
 
 async function publish(){
@@ -466,10 +603,8 @@ let title =
 document.getElementById("title").value;
 
 
-
 let content =
 document.getElementById("content").value;
-
 
 
 let category =
@@ -481,7 +616,6 @@ let imageFile =
 document.getElementById("image").files[0];
 
 
-
 let videoFile =
 document.getElementById("video").files[0];
 
@@ -489,16 +623,18 @@ document.getElementById("video").files[0];
 
 
 
-if(title=="" || content==""){
+if(title==="" || content===""){
 
 
-alert("اكتب عنوان الخبر والنص");
+alert("اكتب العنوان والنص");
 
 
 return;
 
 
 }
+
+
 
 
 
@@ -512,14 +648,13 @@ let videoUrl="";
 
 
 
-
 // رفع الصورة
 
 
 if(imageFile){
 
 
-let imageName =
+let name =
 Date.now()+"_"+imageFile.name;
 
 
@@ -530,45 +665,35 @@ let {error}=await supabase
 
 .from("uploads")
 
-.upload(imageName,imageFile);
+.upload(name,imageFile);
 
 
 
 if(error){
 
-
 alert("خطأ في رفع الصورة");
 
-
-console.log(error);
-
-
 return;
-
 
 }
 
 
 
-
-let result =
+let url =
 supabase
 
 .storage
 
 .from("uploads")
 
-.getPublicUrl(imageName);
+.getPublicUrl(name);
 
 
 
-imageUrl=result.data.publicUrl;
-
+imageUrl=url.data.publicUrl;
 
 
 }
-
-
 
 
 
@@ -582,7 +707,7 @@ imageUrl=result.data.publicUrl;
 if(videoFile){
 
 
-let videoName =
+let name =
 Date.now()+"_"+videoFile.name;
 
 
@@ -593,39 +718,137 @@ let {error}=await supabase
 
 .from("uploads")
 
-.upload(videoName,videoFile);
+.upload(name,videoFile);
 
 
 
 if(error){
 
-
 alert("خطأ في رفع الفيديو");
 
-
-console.log(error);
-
-
 return;
-
 
 }
 
 
 
-
-let result =
+let url =
 supabase
 
 .storage
 
 .from("uploads")
 
-.getPublicUrl(videoName);
+.getPublicUrl(name);
 
 
 
-videoUrl=result.data.publicUrl;
+videoUrl=url.data.publicUrl;
+
+
+}
+
+
+
+
+
+
+
+
+let data={
+
+title:title,
+
+content:content,
+
+category:category
+
+};
+
+
+
+
+if(imageUrl){
+
+data.image=imageUrl;
+
+}
+
+
+
+if(videoUrl){
+
+data.video=videoUrl;
+
+}
+
+
+
+
+
+
+
+// تعديل
+
+
+if(editId){
+
+
+
+await supabase
+
+.from("posts")
+
+.update(data)
+
+.eq("id",editId);
+
+
+
+alert("تم تعديل الخبر");
+
+
+
+editId=null;
+
+
+
+}
+
+
+
+
+
+// نشر جديد
+
+
+else{
+
+
+
+await supabase
+
+.from("posts")
+
+.insert([data]);
+
+
+
+alert("تم نشر الخبر");
+
+
+
+}
+
+
+
+
+
+
+clearForm();
+
+
+loadPosts();
 
 
 
@@ -638,71 +861,275 @@ videoUrl=result.data.publicUrl;
 
 
 
+// تحميل المنشورات
 
-// حفظ الخبر
+
+async function loadPosts(){
 
 
-let {error}=await supabase
+
+let {data,error}=await supabase
 
 .from("posts")
 
-.insert([{
+.select("*")
 
-
-title:title,
-
-
-content:content,
-
-
-image:imageUrl,
-
-
-video:videoUrl,
-
-
-category:category
-
-
-
-}]);
-
-
+.order("created_at",{ascending:false});
 
 
 
 
 if(error){
 
-
 console.log(error);
 
+return;
 
-alert("حدث خطأ أثناء النشر");
+}
 
+
+
+
+
+
+let box=document.getElementById("posts");
+
+
+box.innerHTML="";
+
+
+
+
+
+
+data.forEach(post=>{
+
+
+
+box.innerHTML += `
+
+
+<div class="post">
+
+
+${post.image ?
+
+`<img src="${post.image}">`
+
+:
+
+""
+
+}
+
+
+
+<h3>
+
+${post.title}
+
+</h3>
+
+
+
+<p>
+
+${post.content}
+
+</p>
+
+
+
+<p>
+
+القسم: ${post.category}
+
+</p>
+
+
+
+
+${post.video ?
+
+`
+<video controls>
+<source src="${post.video}">
+</video>
+`
+
+:
+
+""
+
+}
+
+
+
+
+
+
+<div class="actions">
+
+
+<button class="edit"
+
+onclick="editPost('${post.id}')">
+
+تعديل
+
+</button>
+
+
+
+<button class="delete"
+
+onclick="deletePost('${post.id}')">
+
+حذف
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+// حذف منشور
+
+
+async function deletePost(id){
+
+
+
+if(!confirm("هل تريد حذف هذا الخبر؟"))
 
 return;
 
 
+
+await supabase
+
+.from("posts")
+
+.delete()
+
+.eq("id",id);
+
+
+
+alert("تم الحذف");
+
+
+
+loadPosts();
+
+
+
 }
 
 
 
-alert("تم نشر الخبر بنجاح ✅");
 
 
 
-// تنظيف النموذج
+
+
+// تعديل منشور
+
+
+async function editPost(id){
+
+
+
+let {data}=await supabase
+
+.from("posts")
+
+.select("*")
+
+.eq("id",id)
+
+.single();
+
+
+
+
+document.getElementById("title").value=data.title;
+
+
+document.getElementById("content").value=data.content;
+
+
+document.getElementById("category").value=data.category;
+
+
+
+editId=id;
+
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function clearForm(){
 
 
 document.getElementById("title").value="";
 
+
 document.getElementById("content").value="";
+
 
 document.getElementById("image").value="";
 
+
 document.getElementById("video").value="";
 
+
+document.getElementById("imagePreview").style.display="none";
+
+
+document.getElementById("videoPreview").style.display="none";
 
 
 }
@@ -712,9 +1139,6 @@ document.getElementById("video").value="";
 
 
 
-
-
-// تسجيل الخروج
 
 
 function logout(){
@@ -730,9 +1154,12 @@ window.location.href="admin.html";
 
 
 
+
+
+
+
+loadPosts();
+
+
+
 </script>
-
-
-</body>
-
-</html>
