@@ -18,7 +18,6 @@ margin:0;
 padding:20px;
 }
 
-
 .box{
 background:white;
 max-width:600px;
@@ -27,7 +26,6 @@ padding:25px;
 border-radius:15px;
 box-shadow:0 3px 10px #ccc;
 }
-
 
 .logo{
 display:block;
@@ -38,12 +36,10 @@ border-radius:50%;
 object-fit:cover;
 }
 
-
 h1{
 text-align:center;
 color:#b40000;
 }
-
 
 input,textarea,select{
 
@@ -56,11 +52,9 @@ font-size:16px;
 
 }
 
-
 textarea{
 height:130px;
 }
-
 
 button{
 
@@ -75,13 +69,9 @@ cursor:pointer;
 
 }
 
-
 button:hover{
-
 background:#900000;
-
 }
-
 
 .preview img,
 .preview video{
@@ -91,7 +81,6 @@ margin-top:10px;
 border-radius:10px;
 
 }
-
 
 footer{
 
@@ -126,11 +115,10 @@ font-size:14px;
 </h3>
 
 
-<input type="text" placeholder="عنوان الخبر">
+<input type="text" id="title" placeholder="عنوان الخبر">
 
 
-<textarea placeholder="نص الخبر"></textarea>
-
+<textarea id="content" placeholder="نص الخبر"></textarea>
 
 
 <label>
@@ -149,21 +137,21 @@ font-size:14px;
 
 
 
-<select>
+<select id="category">
 
-<option>
+<option value="طفس">
 طفس
 </option>
 
-<option>
+<option value="درعا">
 درعا
 </option>
 
-<option>
+<option value="سوريا">
 سوريا
 </option>
 
-<option>
+<option value="وفيات">
 وفيات
 </option>
 
@@ -182,11 +170,8 @@ font-size:14px;
 
 
 <button onclick="publish()">
-
 نشر الخبر
-
 </button>
-
 
 
 </div>
@@ -205,8 +190,26 @@ font-size:14px;
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
+
+
+const supabaseUrl =
+"https://bcrrogdjklozokgdvgea.supabase.co";
+
+
+const supabaseKey =
+"sb_publishable_ChYRSvUvuEoTccNA6jDEVw_ipjty2kB";
+
+
+const supabase =
+window.supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
 
 
 // معاينة الصورة
@@ -220,7 +223,6 @@ img.src=URL.createObjectURL(e.target.files[0]);
 img.style.display="block";
 
 }
-
 
 
 
@@ -238,16 +240,170 @@ video.style.display="block";
 
 
 
+// نشر الخبر
 
-function publish(){
+async function publish(){
 
-alert("تم تجهيز الخبر للنشر، سنربطه بقاعدة البيانات في الخطوة القادمة");
+
+let title =
+document.getElementById("title").value;
+
+
+let content =
+document.getElementById("content").value;
+
+
+let category =
+document.getElementById("category").value;
+
+
+
+let imageFile =
+document.getElementById("image").files[0];
+
+
+let videoFile =
+document.getElementById("video").files[0];
+
+
+
+let imageUrl="";
+
+let videoUrl="";
+
+
+
+// رفع الصورة
+
+if(imageFile){
+
+
+let imageName =
+Date.now()+"_"+imageFile.name;
+
+
+let {error} =
+await supabase
+.storage
+.from("uploads")
+.upload(imageName,imageFile);
+
+
+
+if(error){
+
+alert("خطأ في رفع الصورة");
+
+return;
+
+}
+
+
+
+let data =
+supabase
+.storage
+.from("uploads")
+.getPublicUrl(imageName);
+
+
+
+imageUrl =
+data.data.publicUrl;
+
+
+}
+
+
+
+
+// رفع الفيديو
+
+if(videoFile){
+
+
+let videoName =
+Date.now()+"_"+videoFile.name;
+
+
+
+let {error} =
+await supabase
+.storage
+.from("uploads")
+.upload(videoName,videoFile);
+
+
+
+if(error){
+
+alert("خطأ في رفع الفيديو");
+
+return;
+
+}
+
+
+
+let data =
+supabase
+.storage
+.from("uploads")
+.getPublicUrl(videoName);
+
+
+
+videoUrl =
+data.data.publicUrl;
+
+
+}
+
+
+
+
+// حفظ المنشور
+
+let {error} =
+await supabase
+.from("posts")
+.insert([{
+
+title:title,
+
+content:content,
+
+image:imageUrl,
+
+video:videoUrl,
+
+category:category
+
+}]);
+
+
+
+if(error){
+
+console.log(error);
+
+alert("حدث خطأ أثناء النشر");
+
+}
+
+else{
+
+alert("تم نشر الخبر بنجاح ✅");
+
+
+}
+
+
 
 }
 
 
 </script>
-
 
 
 </body>
