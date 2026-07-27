@@ -4,91 +4,201 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>لوحة تحكم طفس الرسمية</title>
+<title>
+لوحة تحكم طفس الرسمية
+</title>
+
 
 <style>
 
-body{
-font-family:Tahoma,Arial,sans-serif;
-background:#f3f3f3;
-margin:0;
-padding:20px;
+*{
+box-sizing:border-box;
 }
 
-.box{
-background:white;
-max-width:600px;
-margin:auto;
-padding:25px;
-border-radius:15px;
-box-shadow:0 3px 10px #ccc;
+
+body{
+
+margin:0;
+
+font-family:Tahoma,Arial,sans-serif;
+
+background:#f2f2f2;
+
 }
+
+
+
+header{
+
+background:#111;
+
+color:white;
+
+padding:20px;
+
+text-align:center;
+
+}
+
+
 
 .logo{
-display:block;
-margin:auto;
-width:90px;
-height:90px;
+
+width:100px;
+
+height:100px;
+
 border-radius:50%;
+
 object-fit:cover;
+
+border:3px solid white;
+
 }
+
+
 
 h1{
-text-align:center;
-color:#b40000;
+
+color:white;
+
 }
 
-input,textarea,select{
+
+
+.container{
+
+max-width:700px;
+
+margin:30px auto;
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 3px 10px #ccc;
+
+}
+
+
+
+h2{
+
+color:#b40000;
+
+border-right:5px solid #b40000;
+
+padding-right:10px;
+
+}
+
+
+
+input,
+textarea,
+select{
+
 
 width:100%;
+
 padding:12px;
+
 margin:10px 0;
+
 border:1px solid #ddd;
+
 border-radius:8px;
+
 font-size:16px;
 
 }
 
+
+
 textarea{
-height:130px;
+
+height:150px;
+
 }
+
+
+
+label{
+
+font-weight:bold;
+
+}
+
+
 
 button{
 
 width:100%;
-background:#b40000;
-color:white;
-border:0;
+
 padding:14px;
+
+background:#b40000;
+
+color:white;
+
+border:0;
+
 border-radius:8px;
+
 font-size:17px;
+
 cursor:pointer;
 
+margin-top:10px;
+
 }
 
+
+
 button:hover{
+
 background:#900000;
+
 }
+
+
+
+.logout{
+
+background:#222;
+
+}
+
+
 
 .preview img,
 .preview video{
 
 width:100%;
-margin-top:10px;
+
+margin-top:15px;
+
 border-radius:10px;
 
 }
 
+
+
 footer{
 
 text-align:center;
+
+padding:20px;
+
 color:#777;
-margin-top:25px;
-font-size:14px;
 
 }
+
 
 </style>
 
@@ -98,23 +208,7 @@ font-size:14px;
 <body>
 
 
-<script>
-
-if(localStorage.getItem("tafasLogin") !== "true"){
-
-window.location.href="admin.html";
-
-}
-
-</script>
-
-
-<div class="box">
-
-
-<button onclick="logout()" style="background:#333">
-تسجيل الخروج
-</button>
+<header>
 
 
 <img src="logo.png.PNG" class="logo">
@@ -125,289 +219,226 @@ window.location.href="admin.html";
 </h1>
 
 
-<h3>
-إضافة منشور جديد
-</h3>
+</header>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+لوحة تحكم طفس الرسمية
+</title>
 
 
-<input id="title" type="text" placeholder="عنوان الخبر">
+<style>
+
+*{
+box-sizing:border-box;
+}
 
 
-<textarea id="content" placeholder="نص الخبر"></textarea>
+body{
 
+margin:0;
 
-<label>
-صورة الخبر
-</label>
+font-family:Tahoma,Arial,sans-serif;
 
-<input type="file" id="image" accept="image/*">
-
-
-<label>
-فيديو الخبر (اختياري)
-</label>
-
-<input type="file" id="video" accept="video/*">
-
-
-<select id="category">
-
-<option>طفس</option>
-<option>درعا</option>
-<option>سوريا</option>
-<option>وفيات</option>
-
-</select>
-
-
-<div class="preview">
-
-<img id="imagePreview" style="display:none">
-
-<video id="videoPreview" controls style="display:none"></video>
-
-</div>
-
-
-<button onclick="publish()">
-نشر الخبر
-</button>
-
-
-</div>
-
-
-<footer>
-
-© 2026 طفس الرسمية
-
-<br>
-
-تصميم وتطوير: فارس الرفاعي
-
-</footer>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-<script>
-
-
-const supabaseUrl =
-"https://bcrrogdjklozokgdvgea.supabase.co";
-
-
-const supabaseKey =
-"sb_publishable_ChYRSvUvuEoTccNA6jDEVw_ipjty2kB";
-
-
-const supabase =
-window.supabase.createClient(
-supabaseUrl,
-supabaseKey
-);
-
-
-
-// معاينة الصورة
-
-document.getElementById("image").onchange=function(e){
-
-let img=document.getElementById("imagePreview");
-
-img.src=URL.createObjectURL(e.target.files[0]);
-
-img.style.display="block";
+background:#f2f2f2;
 
 }
 
 
 
-// معاينة الفيديو
+header{
 
-document.getElementById("video").onchange=function(e){
+background:#111;
 
-let video=document.getElementById("videoPreview");
+color:white;
 
-video.src=URL.createObjectURL(e.target.files[0]);
+padding:20px;
 
-video.style.display="block";
-
-}
-
-
-
-// نشر الخبر
-
-async function publish(){
-
-
-let title =
-document.getElementById("title").value;
-
-
-let content =
-document.getElementById("content").value;
-
-
-let category =
-document.getElementById("category").value;
-
-
-let imageFile =
-document.getElementById("image").files[0];
-
-
-let videoFile =
-document.getElementById("video").files[0];
-
-
-
-let imageUrl="";
-
-let videoUrl="";
-
-
-
-// رفع الصورة
-
-if(imageFile){
-
-
-let imageName =
-Date.now()+"_"+imageFile.name;
-
-
-let {error}=await supabase
-.storage
-.from("uploads")
-.upload(imageName,imageFile);
-
-
-
-if(error){
-
-alert("خطأ في رفع الصورة");
-
-console.log(error);
-
-return;
+text-align:center;
 
 }
 
 
 
-let result =
-supabase
-.storage
-.from("uploads")
-.getPublicUrl(imageName);
+.logo{
 
+width:100px;
 
-imageUrl =
-result.data.publicUrl;
+height:100px;
 
+border-radius:50%;
 
-}
+object-fit:cover;
 
-
-
-// رفع الفيديو
-
-if(videoFile){
-
-
-let videoName =
-Date.now()+"_"+videoFile.name;
-
-
-
-let {error}=await supabase
-.storage
-.from("uploads")
-.upload(videoName,videoFile);
-
-
-
-if(error){
-
-alert("خطأ في رفع الفيديو");
-
-console.log(error);
-
-return;
+border:3px solid white;
 
 }
 
 
 
-let result =
-supabase
-.storage
-.from("uploads")
-.getPublicUrl(videoName);
+h1{
 
-
-videoUrl =
-result.data.publicUrl;
-
+color:white;
 
 }
 
 
 
+.container{
 
-// حفظ المنشور في posts
+max-width:700px;
 
-let {error}=await supabase
-.from("posts")
-.insert([{
+margin:30px auto;
 
-title:title,
+background:white;
 
-content:content,
+padding:25px;
 
-image:imageUrl,
+border-radius:15px;
 
-video:videoUrl,
-
-category:category
-
-}]);
-
-
-
-if(error){
-
-console.log(error);
-
-alert("حدث خطأ أثناء نشر الخبر");
-
-}
-
-else{
-
-alert("تم نشر الخبر بنجاح ✅");
-
+box-shadow:0 3px 10px #ccc;
 
 }
 
 
 
+h2{
+
+color:#b40000;
+
+border-right:5px solid #b40000;
+
+padding-right:10px;
+
+}
+
+
+
+input,
+textarea,
+select{
+
+
+width:100%;
+
+padding:12px;
+
+margin:10px 0;
+
+border:1px solid #ddd;
+
+border-radius:8px;
+
+font-size:16px;
+
 }
 
 
 
-// تسجيل الخروج
+textarea{
 
-function logout(){
-
-localStorage.removeItem("tafasLogin");
-
-window.location.href="admin.html";
+height:150px;
 
 }
-  </script>
 
-</body>
 
-</html>
+
+label{
+
+font-weight:bold;
+
+}
+
+
+
+button{
+
+width:100%;
+
+padding:14px;
+
+background:#b40000;
+
+color:white;
+
+border:0;
+
+border-radius:8px;
+
+font-size:17px;
+
+cursor:pointer;
+
+margin-top:10px;
+
+}
+
+
+
+button:hover{
+
+background:#900000;
+
+}
+
+
+
+.logout{
+
+background:#222;
+
+}
+
+
+
+.preview img,
+.preview video{
+
+width:100%;
+
+margin-top:15px;
+
+border-radius:10px;
+
+}
+
+
+
+footer{
+
+text-align:center;
+
+padding:20px;
+
+color:#777;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+
+<img src="logo.png.PNG" class="logo">
+
+
+<h1>
+لوحة تحكم طفس الرسمية
+</h1>
+
+
+</header>
