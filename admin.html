@@ -173,12 +173,13 @@ if(user=="tafas" && pass=="123456"){
 alert("تم تسجيل الدخول بنجاح");
 
 
+localStorage.setItem("tafasLogin","true");
+
+
 window.location.href="dashboard.html";
 
 
 }
-
-else{
 
 
 alert("اسم المستخدم أو كلمة المرور غير صحيحة");
