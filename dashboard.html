@@ -220,225 +220,519 @@ color:#777;
 
 
 </header>
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<div class="container">
 
-<head>
 
-<meta charset="UTF-8">
+<h2>
+إضافة خبر جديد
+</h2>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>
-لوحة تحكم طفس الرسمية
-</title>
 
+<input 
+id="title"
+type="text"
+placeholder="عنوان الخبر">
 
-<style>
 
-*{
-box-sizing:border-box;
-}
 
+<textarea 
+id="content"
+placeholder="نص الخبر">
+</textarea>
 
-body{
 
-margin:0;
 
-font-family:Tahoma,Arial,sans-serif;
 
-background:#f2f2f2;
+<label>
+القسم
+</label>
 
-}
 
+<select id="category">
 
 
-header{
+<option value="طفس">
+طفس
+</option>
 
-background:#111;
 
-color:white;
+<option value="درعا">
+درعا
+</option>
 
-padding:20px;
 
-text-align:center;
+<option value="سوريا">
+سوريا
+</option>
 
-}
 
+<option value="وفيات">
+وفيات
+</option>
 
 
-.logo{
+</select>
 
-width:100px;
 
-height:100px;
 
-border-radius:50%;
 
-object-fit:cover;
+<label>
+صورة الخبر
+</label>
 
-border:3px solid white;
 
-}
+<input 
+type="file"
+id="image"
+accept="image/*">
 
 
 
-h1{
 
-color:white;
 
-}
+<label>
+فيديو الخبر (اختياري)
+</label>
 
 
+<input 
+type="file"
+id="video"
+accept="video/*">
 
-.container{
 
-max-width:700px;
 
-margin:30px auto;
 
-background:white;
 
-padding:25px;
+<div class="preview">
 
-border-radius:15px;
 
-box-shadow:0 3px 10px #ccc;
+<img 
+id="imagePreview"
+style="display:none;">
 
-}
 
 
+<video 
+id="videoPreview"
+controls
+style="display:none;">
+</video>
 
-h2{
 
-color:#b40000;
+</div>
 
-border-right:5px solid #b40000;
 
-padding-right:10px;
 
-}
 
 
+<button onclick="publish()">
 
-input,
-textarea,
-select{
+نشر الخبر
 
+</button>
 
-width:100%;
 
-padding:12px;
 
-margin:10px 0;
 
-border:1px solid #ddd;
 
-border-radius:8px;
+<button class="logout" onclick="logout()">
 
-font-size:16px;
+تسجيل الخروج
 
-}
+</button>
 
 
 
-textarea{
+</div>
 
-height:150px;
 
-}
 
 
+<footer>
 
-label{
+© 2026 طفس الرسمية
 
-font-weight:bold;
+<br>
 
-}
+تصميم وتطوير: فارس الرفاعي
 
+</footer>
 
 
-button{
 
-width:100%;
 
-padding:14px;
 
-background:#b40000;
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-color:white;
 
-border:0;
 
-border-radius:8px;
 
-font-size:17px;
+<script>
 
-cursor:pointer;
 
-margin-top:10px;
+// حماية الصفحة
 
-}
 
+if(localStorage.getItem("tafasLogin") !== "true"){
 
-
-button:hover{
-
-background:#900000;
+window.location.href="admin.html";
 
 }
 
 
 
-.logout{
 
-background:#222;
+
+// Supabase
+
+
+const supabaseUrl =
+"https://bcrrogdjklozokgdvgea.supabase.co";
+
+
+const supabaseKey =
+"sb_publishable_ChYRSvUvuEoTccNA6jDEVw_ipjty2kB";
+
+
+
+const supabase =
+window.supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+
+
+
+
+
+
+// معاينة الصورة
+
+
+document.getElementById("image").onchange=function(e){
+
+
+let img=document.getElementById("imagePreview");
+
+
+img.src=URL.createObjectURL(e.target.files[0]);
+
+
+img.style.display="block";
+
+
+};
+
+
+
+
+
+
+
+// معاينة الفيديو
+
+
+document.getElementById("video").onchange=function(e){
+
+
+let video=document.getElementById("videoPreview");
+
+
+video.src=URL.createObjectURL(e.target.files[0]);
+
+
+video.style.display="block";
+
+
+};
+
+
+
+
+
+
+
+// نشر الخبر
+
+
+async function publish(){
+
+
+
+let title =
+document.getElementById("title").value;
+
+
+
+let content =
+document.getElementById("content").value;
+
+
+
+let category =
+document.getElementById("category").value;
+
+
+
+let imageFile =
+document.getElementById("image").files[0];
+
+
+
+let videoFile =
+document.getElementById("video").files[0];
+
+
+
+
+
+if(title=="" || content==""){
+
+
+alert("اكتب عنوان الخبر والنص");
+
+
+return;
+
 
 }
 
 
 
-.preview img,
-.preview video{
 
-width:100%;
+let imageUrl="";
 
-margin-top:15px;
+let videoUrl="";
 
-border-radius:10px;
+
+
+
+
+
+
+// رفع الصورة
+
+
+if(imageFile){
+
+
+let imageName =
+Date.now()+"_"+imageFile.name;
+
+
+
+let {error}=await supabase
+
+.storage
+
+.from("uploads")
+
+.upload(imageName,imageFile);
+
+
+
+if(error){
+
+
+alert("خطأ في رفع الصورة");
+
+
+console.log(error);
+
+
+return;
+
 
 }
 
 
 
-footer{
 
-text-align:center;
+let result =
+supabase
 
-padding:20px;
+.storage
 
-color:#777;
+.from("uploads")
+
+.getPublicUrl(imageName);
+
+
+
+imageUrl=result.data.publicUrl;
+
+
 
 }
 
 
-</style>
-
-</head>
 
 
-<body>
 
 
-<header>
 
 
-<img src="logo.png.PNG" class="logo">
+
+// رفع الفيديو
 
 
-<h1>
-لوحة تحكم طفس الرسمية
-</h1>
+if(videoFile){
 
 
-</header>
+let videoName =
+Date.now()+"_"+videoFile.name;
+
+
+
+let {error}=await supabase
+
+.storage
+
+.from("uploads")
+
+.upload(videoName,videoFile);
+
+
+
+if(error){
+
+
+alert("خطأ في رفع الفيديو");
+
+
+console.log(error);
+
+
+return;
+
+
+}
+
+
+
+
+let result =
+supabase
+
+.storage
+
+.from("uploads")
+
+.getPublicUrl(videoName);
+
+
+
+videoUrl=result.data.publicUrl;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// حفظ الخبر
+
+
+let {error}=await supabase
+
+.from("posts")
+
+.insert([{
+
+
+title:title,
+
+
+content:content,
+
+
+image:imageUrl,
+
+
+video:videoUrl,
+
+
+category:category
+
+
+
+}]);
+
+
+
+
+
+
+if(error){
+
+
+console.log(error);
+
+
+alert("حدث خطأ أثناء النشر");
+
+
+return;
+
+
+}
+
+
+
+alert("تم نشر الخبر بنجاح ✅");
+
+
+
+// تنظيف النموذج
+
+
+document.getElementById("title").value="";
+
+document.getElementById("content").value="";
+
+document.getElementById("image").value="";
+
+document.getElementById("video").value="";
+
+
+
+}
+
+
+
+
+
+
+
+
+// تسجيل الخروج
+
+
+function logout(){
+
+
+localStorage.removeItem("tafasLogin");
+
+
+window.location.href="admin.html";
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
