@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>طفس الرسمية | Tafas</title>
+<title>طفس الرسمية | Tafas Official</title>
+
 
 <style>
 
@@ -14,90 +15,166 @@
 box-sizing:border-box;
 }
 
+
 body{
+
 margin:0;
+
 font-family:Tahoma,Arial,sans-serif;
+
 background:#f3f3f3;
+
 color:#222;
+
 }
 
 
+/* الهيدر */
+
 header{
+
 background:#111;
+
 color:white;
+
 padding:20px;
+
 text-align:center;
+
 position:relative;
+
 }
 
 
 .logo-img{
+
 width:120px;
+
 height:120px;
-border-radius:50%;
+
 object-fit:cover;
+
+border-radius:50%;
+
 border:3px solid white;
+
 }
+
 
 
 .logo{
+
 font-size:38px;
+
 font-weight:bold;
+
+margin-top:10px;
+
 }
+
 
 
 .subtitle{
+
 color:#ddd;
+
 font-size:18px;
+
 }
 
+
+
+/* زر القائمة */
 
 .menu-btn{
+
 position:absolute;
+
 right:20px;
+
 top:25px;
+
 font-size:32px;
+
 cursor:pointer;
+
 }
 
+
+
+/* القائمة */
 
 .menu{
 
 display:none;
+
 position:absolute;
+
 right:10px;
-top:70px;
+
+top:75px;
+
 background:white;
-width:200px;
+
+width:220px;
+
 border-radius:10px;
+
 overflow:hidden;
-z-index:10;
+
+box-shadow:0 3px 10px #777;
+
+z-index:100;
 
 }
+
 
 
 .menu a{
 
 display:block;
-padding:12px;
+
+padding:13px;
+
 color:#222;
+
 text-decoration:none;
+
 border-bottom:1px solid #ddd;
 
 }
 
 
 
+.menu a:hover{
+
+background:#eee;
+
+}
+
+
+
+
+/* عاجل */
+
 .breaking{
 
 background:#d00000;
+
 color:white;
+
 margin:20px;
-padding:12px;
-border-radius:8px;
+
+padding:14px;
+
+border-radius:10px;
+
 font-weight:bold;
 
+font-size:18px;
+
 }
+
 
 
 
@@ -109,12 +186,91 @@ padding:20px;
 
 
 
+
+/* المنشور المميز */
+
+
+.featured{
+
+background:white;
+
+border-radius:15px;
+
+padding:20px;
+
+box-shadow:0 3px 10px #ccc;
+
+margin-bottom:30px;
+
+}
+
+
+
+.featured img{
+
+width:100%;
+
+height:320px;
+
+object-fit:cover;
+
+border-radius:12px;
+
+}
+
+
+
+.featured h2{
+
+color:#b40000;
+
+font-size:28px;
+
+}
+
+
+
+
+.read{
+
+display:inline-block;
+
+background:#111;
+
+color:white;
+
+padding:10px 20px;
+
+border-radius:8px;
+
+text-decoration:none;
+
+}
+
+
+
+
+/* المنشورات */
+
+
+.posts h2{
+
+color:#b40000;
+
+}
+
+
+
 .post{
 
 background:white;
+
 border-radius:12px;
+
 padding:15px;
+
 margin-bottom:20px;
+
 box-shadow:0 2px 8px #ddd;
 
 }
@@ -124,8 +280,11 @@ box-shadow:0 2px 8px #ddd;
 .post img{
 
 width:100%;
-height:220px;
+
+height:230px;
+
 object-fit:cover;
+
 border-radius:10px;
 
 }
@@ -136,35 +295,140 @@ border-radius:10px;
 
 color:#b40000;
 
-}
-
-
-
-.date{
-
-color:#777;
-font-size:14px;
+font-size:22px;
 
 }
 
 
 
-video{
+.post video{
 
 width:100%;
+
 border-radius:10px;
 
 }
 
 
 
+
+.date{
+
+color:#777;
+
+font-size:14px;
+
+margin-bottom:10px;
+
+}
+
+
+
+
+/* الاشتراك */
+
+
+.subscribe{
+
+background:white;
+
+padding:20px;
+
+text-align:center;
+
+border-radius:12px;
+
+margin-top:30px;
+
+box-shadow:0 2px 8px #ddd;
+
+}
+
+
+
+.subscribe button{
+
+background:#b40000;
+
+color:white;
+
+border:0;
+
+padding:12px 25px;
+
+border-radius:8px;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+
+
+
+
+/* فيسبوك */
+
+
+.social{
+
+text-align:center;
+
+margin:25px;
+
+}
+
+
+
+.social img{
+
+width:40px;
+
+height:40px;
+
+}
+
+
+
+
+
+/* الفوتر */
+
+
 footer{
 
 background:#111;
+
 color:white;
+
 text-align:center;
+
 padding:20px;
+
 margin-top:30px;
+
+}
+
+
+
+
+@media(max-width:600px){
+
+
+.logo{
+
+font-size:30px;
+
+}
+
+
+.featured img{
+
+height:220px;
+
+}
+
 
 }
 
@@ -172,8 +436,6 @@ margin-top:30px;
 </style>
 
 </head>
-
-
 <body>
 
 
@@ -185,12 +447,15 @@ margin-top:30px;
 </div>
 
 
+
 <img src="logo.png.PNG" class="logo-img">
+
 
 
 <div class="logo">
 طفس الرسمية
 </div>
+
 
 
 <div class="subtitle">
@@ -199,18 +464,40 @@ Tafas Official
 
 
 
+
 <div class="menu" id="menu">
 
-<a href="#">الرئيسية</a>
-<a href="#">طفس</a>
-<a href="#">درعا</a>
-<a href="#">سوريا</a>
-<a href="#">وفيات</a>
+<a href="#">
+الرئيسية
+</a>
+
+<a href="#">
+طفس
+</a>
+
+<a href="#">
+درعا
+</a>
+
+<a href="#">
+سوريا
+</a>
+
+<a href="#">
+فيديو
+</a>
+
+<a href="#">
+وفيات
+</a>
 
 </div>
 
 
+
 </header>
+
+
 
 
 
@@ -222,39 +509,167 @@ Tafas Official
 
 
 
+
+
 <div class="container">
+
+
+
+<!-- المنشور المميز -->
+
+<div class="featured">
+
+
+<img id="featureImg" src="post1.jpg">
+
+
+
+<h2 id="featureTitle">
+
+آخر أخبار طفس
+
+</h2>
+
+
+
+<p id="featureText">
+
+تابع آخر الأخبار والتطورات من طفس الرسمية.
+
+</p>
+
+
+
+<a href="#" class="read">
+
+قراءة المزيد
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- آخر المنشورات -->
 
 
 <div class="posts" id="posts">
 
 
 <h2>
+
 آخر المنشورات
+
 </h2>
 
 
-</div>
+<!-- سيتم تحميل الأخبار من Supabase هنا -->
 
 
 </div>
+
+
+
+
+
+
+
+
+<!-- الاشتراك بالإشعارات -->
+
+
+<div class="subscribe">
+
+
+<h2>
+
+🔔 اشترك بالإشعارات
+
+</h2>
+
+
+
+<p>
+
+ابقَ على اطلاع بآخر أخبار طفس الرسمية
+
+</p>
+
+
+
+<button onclick="subscribeNotifications()">
+
+اشترك الآن
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- فيسبوك -->
+
+
+<div class="social">
+
+
+<a href="https://www.facebook.com/share/199KcC8qgg/?mibextid=wwXIfr" target="_blank">
+
+
+<img src="facebook.PNG" alt="فيسبوك طفس الرسمية">
+
+
+</a>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
 
 
 
 <footer>
 
+
 © 2026 طفس الرسمية
+
 
 <br>
 
+
+Tafas Official
+
+
+<br>
+
+
 تصميم وتطوير: فارس الرفاعي
 
+
 </footer>
-
-
-
-
 <script>
 
+
+// فتح وإغلاق القائمة
 
 function openMenu(){
 
@@ -274,7 +689,21 @@ menu.style.display="block";
 }
 
 
+
+
+// زر الاشتراك
+
+function subscribeNotifications(){
+
+alert("تم تسجيل طلب الاشتراك بالإشعارات ✅");
+
+}
+
+
+
+
 </script>
+
 
 
 
@@ -303,13 +732,22 @@ supabaseKey
 
 
 
+
+
+// تحميل المنشورات من قاعدة البيانات
+
+
 async function loadPosts(){
 
 
-const {data,error}=await supabase
+let {data,error}=await supabase
+
 .from("posts")
+
 .select("*")
+
 .order("created_at",{ascending:false});
+
 
 
 
@@ -317,35 +755,40 @@ if(error){
 
 console.log(error);
 
-document.getElementById("posts").innerHTML =
-"<h3>حدث خطأ في تحميل الأخبار</h3>";
-
 return;
 
 }
 
 
 
-let box=document.getElementById("posts");
+
+let postsBox=document.getElementById("posts");
 
 
-box.innerHTML="<h2>آخر المنشورات</h2>";
+
+postsBox.innerHTML="<h2>آخر المنشورات</h2>";
+
+
 
 
 
 data.forEach(post=>{
 
 
-box.innerHTML += `
+postsBox.innerHTML += `
+
 
 
 <div class="post">
 
 
-${post.image ? 
-`<img src="${post.image}">`
-:
-""}
+
+${post.image ? `
+
+<img src="${post.image}">
+
+` : ""}
+
 
 
 
@@ -357,16 +800,23 @@ ${post.title || ""}
 
 
 
+
 <div class="date">
 
 ${post.created_at ?
+
 new Date(post.created_at)
 .toLocaleDateString("ar")
+
 :
+
 ""
+
 }
 
 </div>
+
+
 
 
 
@@ -378,14 +828,18 @@ ${post.content || ""}
 
 
 
-${post.video ?
 
-`
+
+${post.video ? `
+
+
 <video controls>
 
 <source src="${post.video}">
 
 </video>
+
+
 `
 
 :
@@ -399,12 +853,17 @@ ${post.video ?
 </div>
 
 
+
 `;
+
+
 
 });
 
 
+
 }
+
 
 
 
@@ -413,7 +872,6 @@ loadPosts();
 
 
 </script>
-
 
 
 </body>
