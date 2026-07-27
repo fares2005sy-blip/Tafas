@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -99,7 +98,23 @@ font-size:14px;
 <body>
 
 
+<script>
+
+if(localStorage.getItem("tafasLogin") !== "true"){
+
+window.location.href="admin.html";
+
+}
+
+</script>
+
+
 <div class="box">
+
+
+<button onclick="logout()" style="background:#333">
+تسجيل الخروج
+</button>
 
 
 <img src="logo.png.PNG" class="logo">
@@ -115,7 +130,7 @@ font-size:14px;
 </h3>
 
 
-<input type="text" id="title" placeholder="عنوان الخبر">
+<input id="title" type="text" placeholder="عنوان الخبر">
 
 
 <textarea id="content" placeholder="نص الخبر"></textarea>
@@ -125,38 +140,24 @@ font-size:14px;
 صورة الخبر
 </label>
 
-<input type="file" accept="image/*" id="image">
-
+<input type="file" id="image" accept="image/*">
 
 
 <label>
 فيديو الخبر (اختياري)
 </label>
 
-<input type="file" accept="video/*" id="video">
-
+<input type="file" id="video" accept="video/*">
 
 
 <select id="category">
 
-<option value="طفس">
-طفس
-</option>
-
-<option value="درعا">
-درعا
-</option>
-
-<option value="سوريا">
-سوريا
-</option>
-
-<option value="وفيات">
-وفيات
-</option>
+<option>طفس</option>
+<option>درعا</option>
+<option>سوريا</option>
+<option>وفيات</option>
 
 </select>
-
 
 
 <div class="preview">
@@ -168,14 +169,12 @@ font-size:14px;
 </div>
 
 
-
 <button onclick="publish()">
 نشر الخبر
 </button>
 
 
 </div>
-
 
 
 <footer>
@@ -187,10 +186,7 @@ font-size:14px;
 تصميم وتطوير: فارس الرفاعي
 
 </footer>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
@@ -257,7 +253,6 @@ let category =
 document.getElementById("category").value;
 
 
-
 let imageFile =
 document.getElementById("image").files[0];
 
@@ -282,8 +277,7 @@ let imageName =
 Date.now()+"_"+imageFile.name;
 
 
-let {error} =
-await supabase
+let {error}=await supabase
 .storage
 .from("uploads")
 .upload(imageName,imageFile);
@@ -294,26 +288,26 @@ if(error){
 
 alert("خطأ في رفع الصورة");
 
+console.log(error);
+
 return;
 
 }
 
 
 
-let data =
+let result =
 supabase
 .storage
 .from("uploads")
 .getPublicUrl(imageName);
 
 
-
 imageUrl =
-data.data.publicUrl;
+result.data.publicUrl;
 
 
 }
-
 
 
 
@@ -327,8 +321,7 @@ Date.now()+"_"+videoFile.name;
 
 
 
-let {error} =
-await supabase
+let {error}=await supabase
 .storage
 .from("uploads")
 .upload(videoName,videoFile);
@@ -339,22 +332,23 @@ if(error){
 
 alert("خطأ في رفع الفيديو");
 
+console.log(error);
+
 return;
 
 }
 
 
 
-let data =
+let result =
 supabase
 .storage
 .from("uploads")
 .getPublicUrl(videoName);
 
 
-
 videoUrl =
-data.data.publicUrl;
+result.data.publicUrl;
 
 
 }
@@ -362,10 +356,9 @@ data.data.publicUrl;
 
 
 
-// حفظ المنشور
+// حفظ المنشور في posts
 
-let {error} =
-await supabase
+let {error}=await supabase
 .from("posts")
 .insert([{
 
@@ -387,7 +380,7 @@ if(error){
 
 console.log(error);
 
-alert("حدث خطأ أثناء النشر");
+alert("حدث خطأ أثناء نشر الخبر");
 
 }
 
@@ -403,9 +396,22 @@ alert("تم نشر الخبر بنجاح ✅");
 }
 
 
+
+// تسجيل الخروج
+
+function logout(){
+
+localStorage.removeItem("tafasLogin");
+
+window.location.href="admin.html";
+
+}
+
+
 </script>
 
 
 </body>
 
 </html>
+
