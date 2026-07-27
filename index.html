@@ -1,95 +1,213 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>طفس الرسمية | Tafas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
-    }
+<title>طفس الرسمية | Tafas</title>
 
-    header {
-      background: #111;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
+<style>
+*{
+ box-sizing:border-box;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-    }
+body{
+ margin:0;
+ font-family:"Tahoma",Arial,sans-serif;
+ background:#f3f3f3;
+ color:#222;
+}
 
-    nav {
-      background: #b00000;
-      padding: 10px;
-      text-align: center;
-    }
+header{
+ background:#111;
+ color:white;
+ padding:25px;
+ text-align:center;
+}
 
-    nav a {
-      color: white;
-      margin: 10px;
-      text-decoration: none;
-    }
+.logo{
+ font-size:38px;
+ font-weight:bold;
+}
 
-    .breaking {
-      background: red;
-      color: white;
-      padding: 10px;
-      margin: 15px;
-      border-radius: 5px;
-    }
+.subtitle{
+ color:#ddd;
+ font-size:18px;
+}
 
-    .news {
-      background: white;
-      margin: 15px;
-      padding: 20px;
-      border-radius: 10px;
-    }
+nav{
+ background:#b40000;
+ padding:15px;
+ text-align:center;
+}
 
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 15px;
-    }
-  </style>
+nav a{
+ color:white;
+ text-decoration:none;
+ margin:10px;
+ font-size:17px;
+}
+
+.breaking{
+ background:#e00000;
+ color:white;
+ margin:20px;
+ padding:12px;
+ border-radius:8px;
+ font-weight:bold;
+}
+
+.container{
+ padding:20px;
+}
+
+.main-news{
+ background:white;
+ border-radius:15px;
+ padding:25px;
+ box-shadow:0 3px 10px #ccc;
+}
+
+.main-news h1{
+ color:#b40000;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:20px;
+ margin-top:20px;
+}
+
+.card{
+ background:white;
+ border-radius:12px;
+ padding:20px;
+ box-shadow:0 2px 8px #ddd;
+}
+
+.card h3{
+ color:#b40000;
+}
+
+.btn{
+ display:inline-block;
+ background:#111;
+ color:white;
+ padding:8px 15px;
+ border-radius:5px;
+ text-decoration:none;
+}
+
+footer{
+ margin-top:30px;
+ background:#111;
+ color:white;
+ text-align:center;
+ padding:20px;
+}
+
+@media(max-width:600px){
+.logo{
+font-size:30px;
+}
+nav a{
+display:inline-block;
+margin:5px;
+}
+}
+
+</style>
+
 </head>
 
 <body>
 
 <header>
-  <h1>طفس الرسمية</h1>
-  <p>Tafas Official</p>
+<div class="logo">طفس الرسمية</div>
+<div class="subtitle">Tafas Official</div>
 </header>
 
+
 <nav>
-  <a href="#">الرئيسية</a>
-  <a href="#">طفس</a>
-  <a href="#">درعا</a>
-  <a href="#">سوريا</a>
-  <a href="#">فيديو</a>
+<a href="#">الرئيسية</a>
+<a href="#">طفس</a>
+<a href="#">درعا</a>
+<a href="#">سوريا</a>
+<a href="#">فيديو</a>
+<a href="#">صور</a>
+<a href="#">وفيات</a>
 </nav>
 
+
 <div class="breaking">
-🚨 الأخبار العاجلة
+🚨 عاجل | آخر الأخبار والتحديثات من طفس
 </div>
 
-<div class="news">
-<h2>أهلاً بكم في موقع طفس الرسمية</h2>
+
+<div class="container">
+
+<div class="main-news">
+
+<h1>مرحباً بكم في موقع طفس الرسمية</h1>
+
 <p>
-منصة إخبارية تهتم بأخبار طفس ودرعا وسوريا.
+منصة إخبارية تهتم بنقل أخبار طفس ودرعا وسوريا،
+بأسلوب مهني وسريع.
+</p>
+
+<a class="btn" href="#">
+اقرأ الأخبار
+</a>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+<h3>أخبار طفس</h3>
+<p>
+آخر الأخبار المحلية والأحداث اليومية.
 </p>
 </div>
 
+
+<div class="card">
+<h3>أخبار درعا</h3>
+<p>
+تغطية أخبار المحافظة والمناطق المحيطة.
+</p>
+</div>
+
+
+<div class="card">
+<h3>سوريا</h3>
+<p>
+أهم الأخبار السورية.
+</p>
+</div>
+
+
+<div class="card">
+<h3>الوفيات</h3>
+<p>
+إعلانات الوفيات والتعازي.
+</p>
+</div>
+
+
+</div>
+
+</div>
+
+
 <footer>
-© Tafas Official
+© 2026 Tafas Official  
+<br>
+طفس الرسمية
 </footer>
+
 
 </body>
 </html>
