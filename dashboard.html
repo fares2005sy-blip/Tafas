@@ -399,31 +399,10 @@ alert("تم نشر الخبر بنجاح ✅");
 
 // تسجيل الخروج
 
-function login(){
+function logout(){
 
-let user = document.getElementById("user").value;
+localStorage.removeItem("tafasLogin");
 
-let pass = document.getElementById("pass").value;
-
-
-if(user=="tafas" && pass=="123456"){
-
-
-alert("تم تسجيل الدخول بنجاح");
-
-
-localStorage.setItem("tafasLogin","true");
-
-
-window.location.href="dashboard.html";
-
-
-}else{
-
-
-alert("اسم المستخدم أو كلمة المرور غير صحيحة");
-
-
-}
+window.location.href="admin.html";
 
 }
